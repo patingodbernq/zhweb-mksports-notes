@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再次收藏 · 世界杯笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fcf7f0;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #3a3530;
+            padding: 2rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            max-width: 740px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* 文章卡片式主体 */
+        .post {
+            background: #ffffffef;
+            border-radius: 32px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.03), 0 1px 4px rgba(0,0,0,0.02);
+            backdrop-filter: blur(1px);
+            transition: box-shadow 0.2s ease;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .post {
+                padding: 1.8rem 1.2rem;
+                border-radius: 24px;
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin-bottom: 0.6rem;
+            color: #2f2a25;
+        }
+
+        .subhead {
+            font-size: 1.05rem;
+            color: #6b6059;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5ddd5;
+            font-style: normal;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-top: 2.2rem;
+            margin-bottom: 0.75rem;
+            color: #3b342e;
+            border-left: 4px solid #c7b5a4;
+            padding-left: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        /* 引用块 / 提示框 */
+        .insight {
+            background: #f3ede7;
+            border-left: 6px solid #b8a08e;
+            padding: 1.3rem 1.6rem;
+            border-radius: 0 20px 20px 0;
+            margin: 1.8rem 0;
+            font-size: 0.98rem;
+            color: #3c332e;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+        }
+
+        .insight p {
+            margin-bottom: 0.4rem;
+        }
+
+        .insight p:last-child {
+            margin-bottom: 0;
+        }
+
+        .insight strong {
+            color: #4d3f36;
+            font-weight: 600;
+        }
+
+        .quiet-link {
+            color: #7f6b5b;
+            text-decoration: none;
+            border-bottom: 1px dotted #c6b5a6;
+            transition: border 0.15s, color 0.15s;
+            font-weight: 450;
+        }
+
+        .quiet-link:hover {
+            color: #3f2e22;
+            border-bottom: 1px solid #7f6b5b;
+        }
+
+        /* 段落内链接保持温和 */
+        a {
+            color: #5f4d3e;
+            text-decoration: none;
+            border-bottom: 1px solid #d9cbbc;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        a:hover {
+            color: #2c221d;
+            border-bottom-color: #7b6655;
+        }
+
+        .faq-note {
+            background: #f9f3ec;
+            border-radius: 24px;
+            padding: 1.4rem 1.8rem;
+            margin-top: 2.4rem;
+            border: 1px solid #ece2d8;
+        }
+
+        .faq-note summary {
+            font-weight: 500;
+            font-size: 1.05rem;
+            cursor: pointer;
+            color: #4d3f36;
+            padding: 0.2rem 0;
+            outline: none;
+        }
+
+        .faq-note summary::-webkit-details-marker {
+            color: #b8a08e;
+        }
+
+        .faq-note p {
+            margin: 0.8rem 0 0 0;
+            font-size: 0.95rem;
+            color: #534a43;
+        }
+
+        .visit-hint {
+            margin-top: 2.5rem;
+            padding-top: 1.6rem;
+            border-top: 2px solid #e7ddd2;
+            font-size: 0.98rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.6rem;
+            align-items: baseline;
+            color: #5a4f47;
+        }
+
+        .visit-hint span {
+            background: #ede5db;
+            padding: 0.1rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #5d5047;
+            letter-spacing: 0.01em;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: #8c7d72;
+            text-align: center;
+            border-top: 1px solid #e3d8ce;
+            padding-top: 1.5rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e8ddd2;
+            margin: 1.8rem 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #efe7df;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            letter-spacing: 0.02em;
+            color: #564a41;
+            margin-right: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <article class="post">
+            <h1>再次收藏 · 世界杯的安静角落</h1>
+            <div class="subhead">一篇关于持续关注与重访的笔记</div>
+
+            <p>有些页面，打开一次便存为书签，隔段时间总想再回去看看。<strong>世界杯</strong>的新闻与记忆，就适合放在这样一个可以反复回来的地方。无关喧闹的预测，也非短暂的赛程提醒——更像一间安静的阅览室，把与<a href="https://chinese-news-fifa2026.com">世界杯</a>有关的碎片，慢慢整理成连贯的叙述。</p>
+
+            <p>四年的等待让人习惯把目光投向下一届，但真正值得留住的，往往是那些不被赛程表收录的细部：某个球员赛后的沉默，一座球场黄昏时的光影，或者一条冷门战术的缓慢演变。太多信息在推送中流走，于是收藏变得重要——不是囤积，而是为了某次安静的重读。</p>
+
+            <h2>收藏的理由</h2>
+            <p>把一篇文章、一组数据或一段报道放进书签，意味着你给了它第二次被阅读的机会。我常常在赛事结束几个月后，重新打开曾经认真看过的页面，发现当时忽略的细节，也看到时间带来的新视角。所谓「持续关注」，不是每天刷新，而是允许自己隔一段距离再回来。</p>
+
+            <div class="insight">
+                <p><strong>· 重访提示 ·</strong></p>
+                <p>距离下次大赛还有一段时间，不妨把 <a href="https://chinese-news-fifa2026.com" style="border-bottom: 1px dotted #a08d7b;">世界杯</a> 加入浏览器的书签栏。不是为了每天点开，而是当你想起这个主题时，有个熟悉的去处。</p>
+            </div>
+
+            <p>如果你也习惯用书签整理兴趣，大概会明白：一个干净、克制的信息来源，比无数碎片推送更值得保存。从小组赛的冷门到淘汰赛的韧性，从主办国的筹备故事到足球文化的细微变迁——这些内容不需要在第一时间消费，但值得在某个安静的周末完整阅读。</p>
+
+            <h2>收藏夹里的节奏</h2>
+            <p>我自己会把与世界杯相关的书签放进一个叫「间歇性关注」的文件夹。每隔一两周点开一次，读一两篇，然后关上。不必追赶热点，也没有遗漏的焦虑。这种节奏像是给自己留了一个长期开放的窗口，窗外是绿茵、地图和无数人的记忆。</p>
+
+            <p>有时也会翻到较早的报道，比如某座球场的设计方案刚公布时的文章，如今再看，建筑已接近完工——这种时间差带来的阅读体验，是即时新闻无法给予的。收藏，本质上是对时间的一种友善使用。</p>
+
+            <details class="faq-note">
+                <summary>关于重新打开的零碎问答</summary>
+                <p><strong>问：</strong> 怎样避免收藏夹变成堆放链接的角落？<br>
+                <strong>答：</strong> 定期清理当然好，但更重要的或许是接受「大部分收藏不会立即重读」这个事实。哪怕一本正经地存了50篇文章，最后只重新打开两三篇，那两三篇也值了。</p>
+                <p style="margin-top: 0.6rem;"><strong>问：</strong> 比赛周期之外，还有什么值得关注？<br>
+                <strong>答：</strong> 筹备进展、青训脉络、球场城市的文化笔记，甚至历届经典比赛的深度复盘——这些内容在非赛事月份反而更从容。</p>
+            </details>
+
+            <p>页面右上角的小标签、书签栏里的一个条目、或是笔记软件里的一行链接——这些轻量的动作，慢慢会编织成一张个人的兴趣网络。而 <a href="https://chinese-news-fifa2026.com">世界杯</a>，作为这张网络上的一个稳定节点，不需要频繁访问，但你知道它一直在那里。</p>
+
+            <div class="visit-hint">
+                <span>📌 书签建议</span>
+                <span>🔄 间歇重访</span>
+                <span>🧷 收藏而非囤积</span>
+                <span style="margin-left: auto; opacity: 0.7;">再次打开，就是新的阅读</span>
+            </div>
+
+            <div class="footer-note">
+                <span class="tag">收藏习惯</span>
+                <span class="tag">世界杯笔记</span>
+                <span class="tag">2026</span>
+                <span style="display: inline-block; margin-left: 0.8rem;">· 页面本身也是一份安静的书签</span>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
